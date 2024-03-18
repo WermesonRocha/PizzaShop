@@ -20,6 +20,8 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import { OrderDetailsSkeleton } from './order-details-skeleton'
+
 export interface OrderDetailsProps {
   open: boolean
   orderId: string
@@ -35,8 +37,6 @@ export function OrderDetails({ open, orderId }: OrderDetailsProps) {
     return addDays(targetDate, -Math.floor(Math.random() * 30))
   }
 
-  if (!order) return null
-
   return (
     <DialogContent>
       <DialogHeader>
@@ -44,7 +44,7 @@ export function OrderDetails({ open, orderId }: OrderDetailsProps) {
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
 
-      {order && (
+      {order ? (
         <div className="space-y-6">
           <Table>
             <TableBody>
@@ -146,6 +146,8 @@ export function OrderDetails({ open, orderId }: OrderDetailsProps) {
             </TableFooter>
           </Table>
         </div>
+      ) : (
+        <OrderDetailsSkeleton />
       )}
     </DialogContent>
   )
